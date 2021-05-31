@@ -11,6 +11,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import GoBack from "../../Components/GoBack";
 import api from "../../config/api";
+import { maskPhoneNumber } from "../../services/mask.service";
 
 interface IParam {
   _id: string;
@@ -68,7 +69,8 @@ const User: React.FC = () => {
               <Text>id: {user?.company?._id}</Text>
             </Box>
             <Box>
-              <Text>{user?.company?.phone}</Text>
+              {console.log(typeof user?.company?.phone)}
+              <Text>{maskPhoneNumber(user?.company?.phone)}</Text>
             </Box>
           </SimpleGrid>
           <Divider />

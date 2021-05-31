@@ -22,6 +22,7 @@ import { useToasts } from "react-toast-notifications";
 import api from "../../config/api";
 import Swal from "sweetalert2";
 import GoBack from "../../Components/GoBack";
+import { maskPhoneNumber } from "../../services/mask.service";
 
 interface IParam {
   _id: string;
@@ -112,7 +113,7 @@ const Company: React.FC = () => {
               <Text>id: {company?.company?._id}</Text>
             </Box>
             <Box>
-              <Text>{company?.company?.phone}</Text>
+              <Text>{maskPhoneNumber(company?.company?.phone)}</Text>
             </Box>
           </SimpleGrid>
           <Divider />
@@ -148,7 +149,7 @@ const Company: React.FC = () => {
           </Thead>
           <Tbody>
             {company.users.map((user) => (
-              <Tr curosr="pointer" onClick={() => history.push(`/user/${user._id}`)}>
+              <Tr key={user._id} curosr="pointer" onClick={() => history.push(`/user/${user._id}`)}>
                 <Td>{user?.name}</Td>
                 <Td isNumeric>
                   <Button
